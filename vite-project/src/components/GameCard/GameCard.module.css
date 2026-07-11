@@ -1,0 +1,130 @@
+
+/*  მობილურის ბაზისი (Mobile-First) */
+
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: #1e1e24; 
+  border-radius: 8px;
+  overflow: hidden;
+  height: 100%; 
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+
+.card:hover .image {
+  transform: scale(1.05);
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 116, 228, 0.2);
+}
+
+
+
+.imageContainer {
+  width: 100%;
+  aspect-ratio: 3 / 4; 
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #202020;
+  margin-bottom: 8px; 
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block; 
+}
+
+.imageWrapper {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background-color: #121212;
+  overflow: hidden; 
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  flex-grow: 1;
+}
+
+.title {
+  color: #fff;
+  font-size: 16px;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  /* -webkit-line-clamp: 2; */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  white-space: nowrap;     
+  overflow: hidden;       
+  text-overflow: ellipsis;
+  word-break: break-word
+}
+
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.price {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f5f5f5;
+}
+
+.addButton {
+  margin-top: 6px;
+  background-color: #262626;
+  color: #ffffff;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.addButton:hover {
+  background-color: #333333;
+  transform: scale(1.04); 
+
+}
+
+
+/* დესკტოპის და პლანშეტის ვერსია (769px და ზევით) */
+
+@media (min-width: 769px) {
+  .imageContainer {
+    margin-bottom: 12px;
+  }
+
+  .content {
+    gap: 8px;
+  }
+
+  .title {
+    font-size: 16px; 
+  }
+
+  .price {
+    font-size: 16px;
+  }
+
+  .addButton {
+    margin-top: 8px;
+    padding: 8px 8px;
+    font-size: 12px;
+  }
+}

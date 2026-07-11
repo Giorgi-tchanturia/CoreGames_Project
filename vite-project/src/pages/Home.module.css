@@ -1,0 +1,139 @@
+/* მობილურის ბაზისი (Mobile-First) */
+
+.container {
+  width: 100%;
+  box-sizing: border-box; 
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  overflow-x: hidden; 
+  animation: fadeInPage 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes fadeInPage {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.sectionHeader:hover {
+  opacity: 0.8;
+}
+
+.sectionTitle {
+  color: #ffffff;
+  font-size: 18px; 
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.arrow {
+  color: #aaaaae;
+  font-size: 16px;
+}
+
+
+.cardsGrid {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding-bottom: 12px; 
+  width: 100%;
+  box-sizing: border-box;
+  scroll-snap-type: x mandatory;
+}
+
+.cardsGrid::-webkit-scrollbar {
+  height: 4px;
+}
+.cardsGrid::-webkit-scrollbar-track {
+  background: #121212; 
+}
+.cardsGrid::-webkit-scrollbar-thumb {
+  background: #3f3f46; 
+  border-radius: 4px;
+}
+
+.cardWrapper {
+  width: 75vw; 
+  max-width: 260px; 
+  flex-shrink: 0; 
+  scroll-snap-align: start;
+}
+
+
+/* საშუალო დესკტოპ/პლანშეტის ვერსია (769px - 1200px) */
+
+@media (min-width: 769px) {
+  .container {
+    padding: 24px 16px;
+    gap: 40px; 
+  }
+
+  .sectionTitle {
+    font-size: 20px;
+  }
+
+  .arrow {
+    font-size: 18px;
+  }
+
+
+  .cardsGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    overflow-x: visible; 
+    gap: 14px; 
+    padding-bottom: 0;
+    width: 100%;
+  }
+
+  .cardWrapper {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+  }
+}
+
+
+/* დიდი მონიტორების ვერსია (1201px და ზევით) */
+
+@media (min-width: 1201px) {
+  .container {
+    padding: 40px 24px;
+    gap: 60px;
+  }
+
+  .sectionTitle {
+    font-size: 22px;
+  }
+
+  .arrow {
+    font-size: 20px;
+  }
+
+  .cardsGrid {
+    gap: 24px; 
+  }
+}
