@@ -15,9 +15,8 @@ const GameDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const API_KEY = 'e3018dadd02b45c48c1255e18cb65601'; // API გასაღები
+  const API_KEY = 'e3018dadd02b45c48c1255e18cb65601';
 
-  // RAWG API-დან თამაშის დეტალების წამოღება
   useEffect(() => {
     const fetchGameDetails = async () => {
       setLoading(true);
@@ -37,11 +36,10 @@ const GameDetails = () => {
     fetchGameDetails();
   }, [id]);
 
-  //GET რექვესთი
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get(`'https://coregames-project.onrender.com/api/reviews'${id}`);
+        const response = await axios.get(`https://coregames-project.onrender.com/api/reviews/${id}`);
         setReviews(response.data);
       } catch (err) {
         console.error('ბექენდიდან კომენტარების წამოღება ჩაიშალა:', err);
@@ -51,19 +49,17 @@ const GameDetails = () => {
     fetchReviews();
   }, [id]);
 
-  //POST რექვესთი
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
 
     if (!commentText.trim()) return;
 
     try {
-      const response = await axios.post('https://coregames-project.onrender.com/api/reviews/3498', {
+      const response = await axios.post('https://coregames-project.onrender.com/api/reviews', {
         gameId: id,
         username: user?.username || user?.email?.split('@')[0] || 'Anonymous',
         text: commentText
       });
-
 
       setReviews((prev) => [...prev, response.data]);
       setCommentText('');
@@ -90,10 +86,7 @@ const GameDetails = () => {
         />
       </div>
 
-
       <div className={styles.contentWrapper}>
-        
-
         <div className={styles.mainInfo}>
           <h1 className={styles.title}>{game.name}</h1>
           
@@ -112,10 +105,8 @@ const GameDetails = () => {
 
           <hr className={styles.divider} style={{ margin: '40px 0', borderColor: '#333' }} />
 
-
           <div className={styles.reviewsSection}>
             <h2 style={{ color: 'white', marginBottom: '20px' }}>User Reviews</h2>
-
 
             {isAuthenticated ? (
               <form onSubmit={handleCommentSubmit} style={{ marginBottom: '30px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -150,10 +141,9 @@ const GameDetails = () => {
               </p>
             )}
 
-
             <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '20px' }}>
               {reviews.length === 0 ? (
-                <p style={{ color: '#555', italic: 'true' }}>ამ თამაშზე მიმოხილვები ჯერ არ არის. იყავი პირველი!</p>
+                <p style={{ color: '#555', fontStyle: 'italic' }}>ამ თამაშზე მიმოხილვები ჯერ არ არის. იყავი პირველი!</p>
               ) : (
                 reviews.map((review) => (
                   <div 
@@ -173,7 +163,6 @@ const GameDetails = () => {
             </div>
           </div>
         </div>
-
 
         <div className={styles.sidebar}>
           <div className={styles.buyCard}>
