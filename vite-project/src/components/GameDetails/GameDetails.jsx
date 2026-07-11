@@ -41,7 +41,7 @@ const GameDetails = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/reviews/${id}`);
+        const response = await axios.get(`'https://coregames-project.onrender.com/api/reviews'${id}`);
         setReviews(response.data);
       } catch (err) {
         console.error('ბექენდიდან კომენტარების წამოღება ჩაიშალა:', err);
@@ -58,7 +58,7 @@ const GameDetails = () => {
     if (!commentText.trim()) return;
 
     try {
-      const response = await axios.post('http://localhost:5000/api/reviews', {
+      const response = await axios.post('https://coregames-project.onrender.com/api/reviews/3498', {
         gameId: id,
         username: user?.username || user?.email?.split('@')[0] || 'Anonymous',
         text: commentText
