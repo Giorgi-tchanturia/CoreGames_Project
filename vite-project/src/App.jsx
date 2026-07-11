@@ -16,8 +16,7 @@ function App() {
   return (
     <AuthProvider>
       <LibraryProvider>
-        <BrowserRouter>
-          {/* 🟢 დავამატეთ data-theme ატრიბუტი */}
+        <BrowserRouter basename="/CoreGames_Project">
           <div 
             data-theme={themeMode} 
             style={{ 
