@@ -170,6 +170,14 @@
   font-weight: bold; 
   position: relative; 
   cursor: pointer; 
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .onlineDot { 
