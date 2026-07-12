@@ -9,7 +9,8 @@ import styles from './Header.module.css';
 
 export const Header = () => {
   const { library, clearLibrary } = useLibrary();
-  const { isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
+  const avatarInitial = (user?.username || user?.email || '?').charAt(0).toUpperCase();
   
   // 🟢 Redux State & Dispatch
   const dispatch = useDispatch();
@@ -89,7 +90,14 @@ export const Header = () => {
 
           {isAuthenticated ? (
             <div className={styles.profileContainer}>
-               <div className={styles.avatar}>U<span className={styles.onlineDot}></span></div>
+               <Link to="/profile" className={styles.avatar} onClick={() => setIsMenuOpen(false)}>
+                 {user?.avatar ? (
+                   <img src={user.avatar} alt="Profile" className={styles.avatarImg} />
+                 ) : (
+                   avatarInitial
+                 )}
+                 <span className={styles.onlineDot}></span>
+               </Link>
                <button className={styles.authBtn} onClick={handleSignOut}>Sign Out</button>
             </div>
           ) : (
@@ -109,7 +117,14 @@ export const Header = () => {
 
         {isAuthenticated ? (
           <div className={styles.profileContainer}>
-             <div className={styles.avatar}>U<span className={styles.onlineDot}></span></div>
+             <Link to="/profile" className={styles.avatar}>
+               {user?.avatar ? (
+                 <img src={user.avatar} alt="Profile" className={styles.avatarImg} />
+               ) : (
+                 avatarInitial
+               )}
+               <span className={styles.onlineDot}></span>
+             </Link>
              <button className={styles.authBtn} onClick={handleSignOut}>Sign Out</button>
           </div>
         ) : (
