@@ -9,6 +9,8 @@ import { Library } from './pages/Library';
 import { Footer } from './components/Footer/Footer';
 import GameDetails from './components/GameDetails/GameDetails';
 import { Auth } from './pages/Auth/Auth';
+import { Profile } from './pages/Profile/Profile';
+import { Checkout } from './pages/Checkout/Checkout';
 
 function App() {
   const themeMode = useSelector((state) => state.theme.mode);
@@ -34,6 +36,8 @@ function App() {
                 <Route path="/login" element={<Auth />} />
                 <Route element={<ProtectedRoute />}>
                   <Route path="/library" element={<Library />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/checkout" element={<Checkout />} />
                 </Route>
               </Routes>
             </main>
