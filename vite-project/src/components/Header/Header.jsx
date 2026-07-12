@@ -6,13 +6,13 @@ import { useLibrary } from '../../context/LibraryContext';
 import { useAuth } from '../../context/AuthContext';
 import logoImg from '../../assets/logo.png';
 import styles from './Header.module.css';
+import { useWishlist } from '../../context/WishlistContext';
 
 export const Header = () => {
   const { library, clearLibrary } = useLibrary();
   const { user, isAuthenticated, logout } = useAuth();
   const avatarInitial = (user?.username || user?.email || '?').charAt(0).toUpperCase();
   
-  // 🟢 Redux State & Dispatch
   const dispatch = useDispatch();
   const themeMode = useSelector((state) => state.theme.mode);
   
@@ -30,6 +30,9 @@ export const Header = () => {
     }
     setIsMenuOpen(false);
   };
+
+  const { wishlistItems } = useWishlist();
+  const wishlistCount = wishlistItems.length;
 
   const handleSignOut = () => {
     logout();         
@@ -73,10 +76,30 @@ export const Header = () => {
           <Link to="/" className={`${styles.link} ${location.pathname === '/' ? styles.active : ''}`} onClick={() => setIsMenuOpen(false)}>
             Discover
           </Link>
+          <Link to="/catalog" className={`${styles.link} ${location.pathname === '/catalog' ? styles.active : ''}`} onClick={() => setIsMenuOpen(false)}>
+            Catalog
+          </Link>
+          <Link to="/news" className={`${styles.link} ${location.pathname === '/news' ? styles.active : ''}`} onClick={() => setIsMenuOpen(false)}>
+            News
+          </Link>
+          <Link to="/giveaways" className={`${styles.link} ${location.pathname === '/giveaways' ? styles.active : ''}`} onClick={() => setIsMenuOpen(false)}>
+            Giveaways
+          </Link>
+      
           <Link to="/library" className={`${styles.link} ${location.pathname === '/library' ? styles.active : ''}`} onClick={() => setIsMenuOpen(false)}>
             Library
             {library.length > 0 && <span className={styles.badge}>{library.length}</span>}
           </Link>
+          <Link 
+            to="/wishlist" 
+            className={`${styles.link} ${location.pathname === '/wishlist' ? styles.active : ''}`} 
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Wishlist
+          {wishlistCount > 0 && (
+            <span className={styles.badge}>{wishlistCount}</span>
+          )}
+            </Link>
         </nav>
 
         <div className={styles.mobileAuth}>
