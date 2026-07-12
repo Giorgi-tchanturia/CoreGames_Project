@@ -6,11 +6,11 @@ const LibraryContext = createContext();
 export const LibraryProvider = ({ children }) => {
   const [library, setLibrary] = useLocalStorage('game_store_library', []);
 
-  // თამაშის დამატება
+  // თამაშის დამატება (კალათაში ჯერ ხვდება, owned: false)
   const addToLibrary = (game) => {
     const exists = library.some((item) => item.dealID === game.dealID);
     if (!exists) {
-      setLibrary([...library, game]);
+      setLibrary([...library, { ...game, owned: false }]);
     }
   };
 
@@ -28,9 +28,38 @@ export const LibraryProvider = ({ children }) => {
     setLibrary([]); 
   };
 
+  // კალათაში მყოფი (ჯერ არ არის შეძენილი) თამაშები
+  const cartItems = library.filter((item) => !item.owned);
+
+  // უკვე შეძენილი (checkout-ის გავლილი) თამაშები
+  const ownedItems = library.filter((item) => item.owned);
+
+  // კალათის ჯამური ფასის დათვლა
+  const cartTotal = cartItems.reduce((sum, item) => {
+    const price = parseFloat(item.salePrice) || 0;
+    return sum + price;
+  }, 0);
+
+  // checkout - კალათაში მყოფ ყველა თამაშს ვნიშნავთ როგორც შეძენილს
+  const checkoutCart = () => {
+    setLibrary((prev) => prev.map((item) => (item.owned ? item : { ...item, owned: true })));
+  };
+
   return (
     
-    <LibraryContext.Provider value={{ library, addToLibrary, removeFromLibrary, isInLibrary, clearLibrary }}>
+    <LibraryContext.Provider
+      value={{
+        library,
+        addToLibrary,
+        removeFromLibrary,
+        isInLibrary,
+        clearLibrary,
+        cartItems,
+        ownedItems,
+        cartTotal,
+        checkoutCart,
+      }}
+    >
       {children}
     </LibraryContext.Provider>
   );
