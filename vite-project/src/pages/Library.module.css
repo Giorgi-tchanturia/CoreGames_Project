@@ -12,6 +12,59 @@
   margin-bottom: 16px;
 }
 
+.section {
+  margin-bottom: 40px;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.sectionHeader .heading {
+  margin-bottom: 0;
+}
+
+.total {
+  color: #4CAF50;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.owned {
+  color: #4CAF50;
+  font-weight: 600;
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.checkoutBtn {
+  margin-top: 16px;
+  width: 100%;
+  background-color: #0074e4;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.checkoutBtn:hover {
+  background-color: #0063c2;
+  transform: translateY(-1px);
+}
+
 .emptyContainer {
   padding: 40px 16px;
   text-align: center;
@@ -138,5 +191,11 @@
   .removeBtn {
     padding: 8px 12px;
     font-size: 14px;
+  }
+
+  .checkoutBtn {
+    width: auto;
+    align-self: flex-end;
+    padding: 14px 28px;
   }
 }
