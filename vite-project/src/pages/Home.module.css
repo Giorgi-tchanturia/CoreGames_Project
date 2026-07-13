@@ -112,6 +112,7 @@
   width: 100%;
 }
 .featureMain {
+  animation: featuredHeroEnter 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
   background-color: #1b1b20;
   background-position: center;
   background-size: cover;
@@ -123,6 +124,10 @@
   padding: 32px;
   text-align: left;
   width: 100%;
+}
+@keyframes featuredHeroEnter {
+  from { opacity: 0; transform: translateX(42px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 .featureContent {
   display: flex;
@@ -166,13 +171,31 @@
   gap: 8px;
   grid-template-columns: 48px minmax(0, 1fr) auto;
   min-height: 62px;
+  overflow: hidden;
   padding: 7px;
+  position: relative;
   text-align: left;
+  transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
 }
 .featureThumb:hover,
 .featureThumbActive {
   background: #2b2b31;
   border-color: #5d5d68;
+  transform: translateY(-2px);
+}
+.featureThumbActive::after {
+  animation: featuredProgress 5s linear forwards;
+  background: #ffffff;
+  bottom: 0;
+  content: '';
+  height: 3px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+@keyframes featuredProgress {
+  from { transform: scaleX(0); transform-origin: left; }
+  to { transform: scaleX(1); transform-origin: left; }
 }
 .featureThumb img {
   border-radius: 4px;
@@ -249,5 +272,17 @@
   }
   .cardsGrid {
     gap: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .featureThumb,
+  .carouselButton {
+    transition: none;
+  }
+  .featureThumbActive::after {
+    animation: none;
+  }
+  .featureMain {
+    animation: none;
   }
 }
