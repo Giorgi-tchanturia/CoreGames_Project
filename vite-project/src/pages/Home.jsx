@@ -86,6 +86,16 @@ export const Home = () => {
     fetchGames();
   }, [searchQuery]);
 
+  useEffect(() => {
+    if (sectionsData.popular.length < 2) return undefined;
+
+    const timer = window.setInterval(() => {
+      setActiveFeature((current) => (current + 1) % sectionsData.popular.length);
+    }, 5000);
+
+    return () => window.clearInterval(timer);
+  }, [sectionsData.popular.length]);
+
 
   const handleAddToLibrary = (game, priceStr) => {
     addToLibrary({
@@ -159,7 +169,7 @@ export const Home = () => {
     <div className={styles.container}>
       {featuredGame && (
         <section className={styles.featured} aria-label="Featured games">
-          <button className={styles.featureMain} onClick={() => navigate(`/game/${featuredGame.id}`)} style={{ backgroundImage: `linear-gradient(90deg, rgba(10, 10, 12, .88) 0%, rgba(10, 10, 12, .36) 56%, rgba(10, 10, 12, .08) 100%), url(${featuredGame.background_image})` }}>
+          <button key={featuredGame.id} className={styles.featureMain} onClick={() => navigate(`/game/${featuredGame.id}`)} style={{ backgroundImage: `linear-gradient(90deg, rgba(10, 10, 12, .88) 0%, rgba(10, 10, 12, .36) 56%, rgba(10, 10, 12, .08) 100%), url(${featuredGame.background_image})` }}>
             <span className={styles.featureContent}>
               <span className={styles.featureEyebrow}>FEATURED NOW</span>
               <strong>{featuredGame.name}</strong>
