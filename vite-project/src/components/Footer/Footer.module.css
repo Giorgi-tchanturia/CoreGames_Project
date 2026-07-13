@@ -64,3 +64,21 @@
     gap: 24px;
   }
 }
+
+/* Light-theme footer. */
+:global([data-theme='light']) .footer {
+  background-color: #ffffff;
+  border-top: 1px solid #d4d4d8;
+}
+
+:global([data-theme='light']) .link {
+  color: #52525b;
+}
+
+:global([data-theme='light']) .link:hover {
+  color: #18181b;
+}
+
+:global([data-theme='light']) .copyright {
+  color: #71717a;
+}
